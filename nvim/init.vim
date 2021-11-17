@@ -24,7 +24,7 @@ set signcolumn=yes
 set backspace=indent,eol,start
 set wildmenu
 set termguicolors
-set cmdheight=2
+" set cmdheight=2
 set encoding=utf8
 set cursorline 
 hi CursorLine term=bold cterm=bold guibg=Grey40
@@ -62,6 +62,10 @@ nnoremap ter <C-w><C-v> <C-w>l :term<cr> <S-a>
 "Close terminal
 tnoremap etr <C-\><C-n> :q<cr>
 
+" Quickly insert an empty new line without entering insert mode
+nnoremap <leader>o o<esc>
+nnoremap <leader>o o<esc>
+
 "Indentation
 nnoremap <Tab>   >>
 nnoremap <S-Tab> <<
@@ -88,7 +92,8 @@ Plug 'arzg/vim-colors-xcode'
 Plug 'altercation/vim-colors-solarized'
 Plug 'navarasu/onedark.nvim'
 Plug 'gerardbm/vim-atomic'
-
+Plug 'arcticicestudio/nord-vim'
+Plug 'sonph/onehalf', { 'rtp': 'vim' }
 "Telescope
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
@@ -119,16 +124,17 @@ call plug#end()
 
 "Theme settings
 " Airline settings
-let g:airline_theme                       = 'atomic'
+let g:airline_theme                       = 'onedark'
 let g:airline_powerline_fonts             = 1
 let g:airline#extensions#tabline#enabled  = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline_section_z                   = airline#section#create([
 			\ '%1p%%',
-			\ 'Ξ%l%\/%L ln',
-			\ ':%c c'])
+			\ 'Ξ%l%\/%L',
+			\ ':%c'])
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline#extensions#whitespace#enabled = 0
 set t_Co=256
 
 
@@ -138,10 +144,11 @@ let g:gruvbox_invert_indent_guides=1
 let g:gruvbox_contrast_dark='softer'
 let g:onedark_style = 'warm'
 
+let g:gruvbox_transparent_bg=1
+
 "Indetation
 let g:indentLine_char_list = ['|', '¦']
 
-" colorscheme atomic
 " AtomicNightRedSoft
 " AtomicDarkBlueSoft
 " AtomicDarkBlueHard
@@ -154,8 +161,9 @@ let g:indentLine_char_list = ['|', '¦']
 " AtomicLightSoft
 " AtomicLightHar
 
-
 colorscheme onedark
+" colorscheme atomic
+" colorscheme nord
 " colorscheme solarized
 " colorscheme gruvbox
 " colorscheme dracula
@@ -275,3 +283,13 @@ endif
 
 nnoremap <silent> K :call CocAction('doHover')<CR>
 
+" Close all buffers except current one
+function! CloseAllBuffersButCurrent()
+  let curr = bufnr("%")
+  let last = bufnr("$")
+
+  if curr > 1    | silent! execute "1,".(curr-1)."bd"     | endif
+  if curr < last | silent! execute (curr+1).",".last."bd" | endif
+endfunction
+
+nmap <Leader>\c :call CloseAllBuffersButCurrent()<CR>
