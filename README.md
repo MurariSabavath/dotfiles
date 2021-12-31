@@ -1,3 +1,3 @@
-# Murari's Dotfiles
+## Murari's Dotfiles
 
-![Alt text](images/Screenshot (352).png?raw=true "Title")
+![Alt text](https://github.com/MurariSabavath/dotfiles/blob/ce0207994ff8f02a54d06e57da57c3f26ad1af61/images/Screenshot%20(352).png)
