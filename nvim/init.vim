@@ -24,12 +24,12 @@ set signcolumn=yes
 set backspace=indent,eol,start
 set wildmenu
 set termguicolors
-" set cmdheight=2
+set cmdheight=2
 set encoding=utf8
 set cursorline 
 hi CursorLine term=bold cterm=bold guibg=Grey40
 
-"Key Mappings"
+"Key Mappings
 inoremap fj <Esc>
 cnoremap jf <Esc>
 
@@ -72,6 +72,35 @@ nnoremap <S-Tab> <<
 vnoremap <Tab>   >><Esc>gv
 vnoremap <S-Tab> <<<Esc>gv
 
+" Split faster
+nnoremap <leader>\ :vs<CR>
+nnoremap <leader>- :sp<CR>
+
+" Normal Key Map
+nnoremap U :redo<CR>
+nnoremap Q :q!<CR>
+nnoremap W :w!<CR>
+
+" settings for resize splitted window
+nmap w[ :vertical resize -3<CR>
+nmap w] :vertical resize +3<CR>
+
+" Buftabline Config Manager
+nnoremap <leader>l :bnext<CR>
+nnoremap <leader>h :bprev<CR>
+nnoremap <leader>x :bdelete<CR>
+
+" Smooth Scroll the terminal
+" nnoremap <silent> <C-u> :call smooth_scroll#up(&scroll, 0, 2)<CR>
+" nnoremap <silent> <C-d> :call smooth_scroll#down(&scroll, 0, 2)<CR>
+
+nnoremap <silent> <C-d> :call comfortable_motion#flick(100)<CR>
+nnoremap <silent> <C-u> :call comfortable_motion#flick(-100)<CR>
+nnoremap <silent> <C-f> :call comfortable_motion#flick(200)<CR>
+nnoremap <silent> <C-b> :call comfortable_motion#flick(-200)<CR>
+
+noremap <silent> <ScrollWheelDown> :call comfortable_motion#flick(40)<CR>
+noremap <silent> <ScrollWheelUp>   :call comfortable_motion#flick(-40)<CR>
 
 "Plugins"
 call plug#begin('~/AppData/Local/nvim/plugged')
@@ -119,19 +148,21 @@ Plug 'tpope/vim-commentary'
 "Indentation guide
 Plug 'Yggdroot/indentLine'
 
+
+Plug 'mhinz/vim-startify'
+
 call plug#end()
 
 
-"Theme settings
 " Airline settings
-let g:airline_theme                       = 'onedark'
+let g:airline_theme                       = 'gruvbox'
 let g:airline_powerline_fonts             = 1
 let g:airline#extensions#tabline#enabled  = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline_section_z                   = airline#section#create([
-			\ '%1p%%',
-			\ 'Ξ%l%\/%L',
-			\ ':%c'])
+            \ '%1p%%',
+            \ 'Ξ%l%\/%L',
+            \ ':%c'])
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline#extensions#whitespace#enabled = 0
@@ -142,12 +173,13 @@ let g:gruvbox_italic=1
 let g:gruvbox_improved_strings=1
 let g:gruvbox_invert_indent_guides=1
 let g:gruvbox_contrast_dark='softer'
-let g:onedark_style = 'warm'
-
+let g:onedark_style = 'cool'
 let g:gruvbox_transparent_bg=1
 
 "Indetation
 let g:indentLine_char_list = ['|', '¦']
+
+"Theme settings
 
 " AtomicNightRedSoft
 " AtomicDarkBlueSoft
@@ -161,36 +193,17 @@ let g:indentLine_char_list = ['|', '¦']
 " AtomicLightSoft
 " AtomicLightHar
 
-colorscheme onedark
+" colorscheme onedark
 " colorscheme atomic
 " colorscheme nord
 " colorscheme solarized
-" colorscheme gruvbox
+colorscheme gruvbox
 " colorscheme dracula
 " colorscheme dogrun
 " colorscheme xcodedarkhc
 " colorscheme one
 " colorscheme OceanicNext
 " colorscheme wal
-
-set encoding=UTF-8
-
- "dark red
-hi tsxTagName guifg=#E06C75
-
-" orange
-hi tsxCloseString guifg=#F99575
-hi tsxCloseTag guifg=#F99575
-hi tsxAttributeBraces guifg=#F99575
-hi tsxEqual guifg=#F99575
-
-" yellow
-hi tsxAttrib guifg=#F8BD7F cterm=italic
-
-" light-grey
-hi tsxTypeBraces guifg=#999999
-" dark-grey
-hi tsxTypes guifg=#666666
 
 
 "Telescope Keymaps
@@ -205,9 +218,8 @@ let g:NERDTreeIgnore = ['^node_modules$']
 
 augroup NerdTreeSettings
   autocmd! 
-  autocmd VimEnter * NERDTree "opens NerdTree when vim stars
+  autocmd VimEnter * NERDTree "opens NerdTree when vim starts
   autocmd VimEnter * wincmd p "sets to Prev Window
-  "autocmd BufEnter * call SyncTree()
   autocmd FileType nerdtree setlocal relativenumber
 augroup END
 
@@ -233,36 +245,6 @@ nnoremap <leader>n :NERDTreeFocus<CR>
 nnoremap <C-n> :NERDTree<CR>
 nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
-
-"JSX-tag colors
-" dark red
-hi tsxTagName guifg=#E06C75
-hi tsxComponentName guifg=#E06C75
-hi tsxCloseComponentName guifg=#E06C75
-
-" orange
-hi tsxCloseString guifg=#F99575
-hi tsxCloseTag guifg=#F99575
-hi tsxCloseTagName guifg=#F99575
-hi tsxAttributeBraces guifg=#F99575
-hi tsxEqual guifg=#F99575
-
-" yellow
-hi tsxAttrib guifg=#F8BD7F cterm=italic" dark red
-hi tsxTagName guifg=#E06C75
-hi tsxComponentName guifg=#E06C75
-hi tsxCloseComponentName guifg=#E06C75
-
-" orange
-hi tsxCloseString guifg=#F99575
-hi tsxCloseTag guifg=#F99575
-hi tsxCloseTagName guifg=#F99575
-hi tsxAttributeBraces guifg=#F99575
-hi tsxEqual guifg=#F99575
-
-" yellow
-hi tsxAttrib guifg=#F8BD7F cterm=italic
-
 
 "coc
 let g:coc_global_extensions=['coc-css', 'coc-emmet', 
@@ -293,3 +275,15 @@ function! CloseAllBuffersButCurrent()
 endfunction
 
 nmap <Leader>\c :call CloseAllBuffersButCurrent()<CR>
+
+"For startify
+let g:startify_custom_header = [
+\ '   _   _        _  _            __      __   _    _   ____   _ ',
+\ '  | | | |  ___ | || |  ___     |   \  /   | | |  | | |    | | |',
+\ '  | |_| | / _ \| || | / _ \    | |\ \/ /| | | |  | | | | _| | |',
+\ '  |  _  ||  __/| || || (_) |   | | \  / | | | |__| | |   \  | |',
+\ '  |_| |_| \___||_||_| \___/    |_|  \/  |_| \______/ |_|\_\ |_|' ,
+\ '  ',
+\ '  ',
+\]
+let g:user_emmet_leader_key='<Tab>'
