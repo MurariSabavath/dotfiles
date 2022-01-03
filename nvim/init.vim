@@ -64,7 +64,8 @@ tnoremap etr <C-\><C-n> :q<cr>
 
 " Quickly insert an empty new line without entering insert mode
 nnoremap <leader>o o<esc>
-nnoremap <leader>o o<esc>
+nnoremap <leader>O O<esc>
+
 
 "Indentation
 nnoremap <Tab>   >>
@@ -278,11 +279,11 @@ nmap <Leader>\c :call CloseAllBuffersButCurrent()<CR>
 
 "For startify
 let g:startify_custom_header = [
-\ '   _   _        _  _            __      __   _    _   ____   _ ',
-\ '  | | | |  ___ | || |  ___     |   \  /   | | |  | | |    | | |',
-\ '  | |_| | / _ \| || | / _ \    | |\ \/ /| | | |  | | | | _| | |',
-\ '  |  _  ||  __/| || || (_) |   | | \  / | | | |__| | |   \  | |',
-\ '  |_| |_| \___||_||_| \___/    |_|  \/  |_| \______/ |_|\_\ |_|' ,
+\ '   _   _        _  _            __      __   _    _   ____      __      ____   _  ',
+\ '  | | | |  ___ | || |  ___     |   \  /   | | |  | | |    |    /__\    |    | | | ',
+\ '  | |_| | / _ \| || | / _ \    | |\ \/ /| | | |  | | | | _|   / __ \   | | _| | | ',
+\ '  |  _  ||  __/| || || (_) |   | | \  / | | | |__| | |   \   / /  \ \  |   \  | | ',
+\ '  |_| |_| \___||_||_| \___/    |_|  \/  |_| \______/ |_|\_\ /_/    \_\ |_|\_\ |_| ' ,
 \ '  ',
 \ '  ',
 \]
