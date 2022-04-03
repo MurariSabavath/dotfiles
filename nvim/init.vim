@@ -57,6 +57,8 @@ inoremap <C-j> <Down>
 inoremap <C-h> <Left>
 inoremap <C-l> <Right>
 
+nnoremap <leader>pv :Vex<CR>
+
 "Open terminal with vertical split
 nnoremap ter <C-w><C-v> <C-w>l :term<cr> <S-a>
 "Close terminal
@@ -64,8 +66,7 @@ tnoremap etr <C-\><C-n> :q<cr>
 
 " Quickly insert an empty new line without entering insert mode
 nnoremap <leader>o o<esc>
-nnoremap <leader>O O<esc>
-
+nnoremap <leader>o o<esc>
 
 "Indentation
 nnoremap <Tab>   >>
@@ -91,18 +92,6 @@ nnoremap <leader>l :bnext<CR>
 nnoremap <leader>h :bprev<CR>
 nnoremap <leader>x :bdelete<CR>
 
-" Smooth Scroll the terminal
-" nnoremap <silent> <C-u> :call smooth_scroll#up(&scroll, 0, 2)<CR>
-" nnoremap <silent> <C-d> :call smooth_scroll#down(&scroll, 0, 2)<CR>
-
-nnoremap <silent> <C-d> :call comfortable_motion#flick(100)<CR>
-nnoremap <silent> <C-u> :call comfortable_motion#flick(-100)<CR>
-nnoremap <silent> <C-f> :call comfortable_motion#flick(200)<CR>
-nnoremap <silent> <C-b> :call comfortable_motion#flick(-200)<CR>
-
-noremap <silent> <ScrollWheelDown> :call comfortable_motion#flick(40)<CR>
-noremap <silent> <ScrollWheelUp>   :call comfortable_motion#flick(-40)<CR>
-
 "Plugins"
 call plug#begin('~/AppData/Local/nvim/plugged')
 
@@ -124,6 +113,7 @@ Plug 'navarasu/onedark.nvim'
 Plug 'gerardbm/vim-atomic'
 Plug 'arcticicestudio/nord-vim'
 Plug 'sonph/onehalf', { 'rtp': 'vim' }
+
 "Telescope
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
@@ -142,6 +132,7 @@ Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 Plug 'jparise/vim-graphql'
+Plug 'iamcco/coc-tailwindcss',  {'do': 'yarn install --frozen-lockfile && yarn run build'}
 
 "Commenting
 Plug 'tpope/vim-commentary'
@@ -151,6 +142,14 @@ Plug 'Yggdroot/indentLine'
 
 
 Plug 'mhinz/vim-startify'
+
+" Git
+Plug 'airblade/vim-gitgutter'
+
+"Live server 
+Plug 'turbio/bracey.vim', {'do': 'npm install --prefix server'}
+
+Plug 'ggandor/lightspeed.nvim'
 
 call plug#end()
 
@@ -167,15 +166,14 @@ let g:airline_section_z                   = airline#section#create([
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline#extensions#whitespace#enabled = 0
-set t_Co=256
 
 
 let g:gruvbox_italic=1
 let g:gruvbox_improved_strings=1
 let g:gruvbox_invert_indent_guides=1
-let g:gruvbox_contrast_dark='softer'
-let g:onedark_style = 'cool'
-let g:gruvbox_transparent_bg=1
+let g:gruvbox_contrast_dark='hard'
+
+let g:onedark_style = 'medium'
 
 "Indetation
 let g:indentLine_char_list = ['|', '¦']
@@ -219,7 +217,7 @@ let g:NERDTreeIgnore = ['^node_modules$']
 
 augroup NerdTreeSettings
   autocmd! 
-  autocmd VimEnter * NERDTree "opens NerdTree when vim starts
+  " autocmd VimEnter * NERDTree "opens NerdTree when vim starts
   autocmd VimEnter * wincmd p "sets to Prev Window
   autocmd FileType nerdtree setlocal relativenumber
 augroup END
@@ -250,10 +248,13 @@ nnoremap <C-f> :NERDTreeFind<CR>
 "coc
 let g:coc_global_extensions=['coc-css', 'coc-emmet', 
             \'coc-html', 'coc-html-css-support', 
-            \'coc-json', 'coc-tailwindcss', 'coc-tsserver']
+            \'coc-json', 'coc-tailwindcss', 'coc-tsserver', 'coc-pyright']
+
+let g:python3_host_prog = 'C:\Users\smura\AppData\Local\Programs\Python\Python310\python.exe'
 
 autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
 autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
+
 
 if isdirectory('./node_modules') && isdirectory('./node_modules/prettier')
   let g:coc_global_extensions += ['coc-prettier']
@@ -289,3 +290,4 @@ let g:startify_custom_header = [
 \]
 
 let g:user_emmet_leader_key='<Tab>'
+
