@@ -143,9 +143,6 @@ Plug 'Yggdroot/indentLine'
 
 Plug 'mhinz/vim-startify'
 
-" Git
-Plug 'airblade/vim-gitgutter'
-
 "Live server 
 Plug 'turbio/bracey.vim', {'do': 'npm install --prefix server'}
 
@@ -290,4 +287,3 @@ let g:startify_custom_header = [
 \]
 
 let g:user_emmet_leader_key='<Tab>'
-
